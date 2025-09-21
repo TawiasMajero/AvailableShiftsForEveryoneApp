@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { Shift } from '../types/shift';
+import { fetchShifts } from '../services/ApiService';
 
 class ShiftStore {
   shifts: Shift[] = [];
@@ -10,11 +11,11 @@ class ShiftStore {
     makeAutoObservable(this);
   }
 
-  async fetchShifts(/** Не забыть вписать параметры */) {
+  async fetchShifts(lat: number, lon: number) {
     this.loading = true;
     this.error = null;
     try {
-      this.shifts = []; // Здесь будет заглушка для API
+      this.shifts = await fetchShifts(lat, lon); // Здесь будет заглушка для API
     } catch (err) {
       this.error = 'Ошибка загрузки смен';
     } finally {
