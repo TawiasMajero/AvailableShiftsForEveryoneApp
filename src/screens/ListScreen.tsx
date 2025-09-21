@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { styles } from '../styles/styles';
-import { getLocation } from '../services/GeolocationService';
 
 const ListScreen = observer(() => {
   const navigation =
@@ -15,10 +14,11 @@ const ListScreen = observer(() => {
   useEffect(() => {
     async function load() {
       try {
-        const { lat, lon } = await getLocation();
+        const lat = 45.039268;
+        const lon = 38.987221;
         await shiftStore.fetchShifts(lat, lon);
       } catch (err) {
-        shiftStore.error = err as string;
+        shiftStore.error = 'Ошибка геолокации';
       }
     }
     load();
