@@ -15,7 +15,7 @@ class ShiftStore {
     this.loading = true;
     this.error = null;
     try {
-      this.shifts = await fetchShifts(lat, lon); // Здесь будет заглушка для API
+      this.shifts = await fetchShifts(lat, lon);
     } catch (err) {
       this.error = 'Ошибка загрузки смен';
     } finally {
